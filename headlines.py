@@ -9,16 +9,11 @@ RSS_FEEDS = {'arts': 'http://feeds.reuters.com/news/artsculture',
 
 
 @app.route("/")
-@app.route("/arts")
 def arts():
     return get_news('arts')
 
 
-@app.route("/business")
-def business():
-    return get_news('business')
-
-
+@app.route("/<publication>")
 def get_news(publication):
     feed = feedparser.parse(RSS_FEEDS[publication])
     first_article = feed['entries'][0]
